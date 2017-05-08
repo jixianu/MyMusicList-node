@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <!-- 
+  1. 网站根路径后面的路径或者说文件名，不一定有这个文件，不一定用来表示文件的路径的
+      只是一个唯一标识而已
+      例如：<link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+      在这里是把这个请求路径当作了一个唯一标识符。
+      例如：<a href="/">我的音乐</a>
+      表示请求我的网站 / 这个 根路径，用来访问我的 index.html 页面
+  2. 在 file 协议中 / 标识 file:// 是根路径，没有什么实际意义
+      在 使用 file 协议开发静态页面的时候，就是默认的普通路径就可以了
+      <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
+   -->
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+
+<body>
+  <!-- 普通表单提交（没有文件）
+表单提交要素：
+  1. form 标签属性 action 用于指定向哪个 url 地址发起请求
+  2. form 表单中要提交的表单元素必须要有 name 属性
+  3. form 标签属性 method 用于指定提交的方法 GET、POST
+  
+  GET 提交：
+    表单将当前表单内所有具有 name 属性的表单元素提取出来，然后通过 下面的格式拼接到一起，然后，放到 action 指定的 url 地址后面（加 ? 号）
+
+  name=value&name2=value2&name3=value3
+
+  http://127.0.0.1:3000/addmusic?name=zhangsan&age=18&gender=男
+
+  GET 提交一定是通过 url 来传递数据的，数据是直接暴露在地址栏中的
+
+  表单 POST 提交：
+    表单将当前表单内所有具有 name 属性的表单元素提取出来，然后通过 下面的格式拼接到一起，然后，放到 action 指定的 url 地址后面（加 ? 号）
+
+  name=value&name2=value2&name3=value3
+
+    POST 提交方式，表单会将 组装好的查询字符串 放到 请求报文体 中，提交到后台服务器
+   -->
+
+
+   <!-- 
+
+  有文件的表单提交：
+
+    1. 表单的提交方法 method 必须是 post
+    2. 表单的 ectype 属性必须设置为 multipart/form-data
+    3. file 类型的 input 元素也是一样的。必须具有 name 属性
+
+    -->
+  <div class="container">
+    <div class="page-header">
+      <h1><a href="index.html">我的音乐</a> <small>添加音乐</small></h1>
+    </div>
+    <form action="/add" method="post" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="title">标题</label>
+        <input type="text" class="form-control" id="title" name="title" placeholder="请输入音乐标题">
+      </div>
+      <div class="form-group">
+        <label for="artist">歌手</label>
+        <input type="text" class="form-control" id="singer" name="singer" placeholder="请输入歌手名称">
+      </div>
+      <div class="form-group">
+        <label for="music_file">音乐</label>
+        <input type="file" id="music" name="music" accept="audio/*">
+        <p class="help-block">请选择要上传的音乐文件.</p>
+      </div>
+      <div class="form-group">
+        <label for="image_file">海报</label>
+        <input type="file" id="poster" name="poster" accept="image/*">
+        <p class="help-block">请选择要上传的音乐海报.</p>
+      </div>
+      <button type="submit" class="btn btn-success">点击添加</button>
+    </form>
+  </div>
+</body>
+
+</html>
